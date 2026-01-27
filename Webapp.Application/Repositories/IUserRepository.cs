@@ -1,12 +1,11 @@
-﻿namespace Application.Repository;
+﻿using Application.Configurations;
+using Domain;
+
+namespace Application.Repository;
 
 public interface IUserRepository
 {
-    public Task Save();
-    
-    public Task Delete();
-
-    public Task Update();
-
-    public Task FindByID(Guid id);
+    Task Insert(User entity);
+    Task Update(User entity);
+    Task Delete(User entity);
 }

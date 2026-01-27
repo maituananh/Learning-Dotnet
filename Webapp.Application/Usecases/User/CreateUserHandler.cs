@@ -1,19 +1,20 @@
 ﻿using Application.Commands.User;
+using Application.Configurations;
 using Application.Repository;
+using Domain;
 
-namespace Application.Usecases.User.CreateUserHandler;
+namespace Application.Usecases.CreateUserHandler;
 
-public class CreateUserHandler
+public class CreateUserHandler(IUnitOfWork unitOfWork, IUserRepository userRepository)
 {
-    private readonly IUserRepository _userRepository;
 
-    public CreateUserHandler(IUserRepository userRepository) 
-    {
-        _userRepository = userRepository;
-    }
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IUserRepository _userRepository = userRepository;
 
-    public void Create(CreateUserCommand command)
+    public async Task Create(CreateUserCommand command)
     {
-        Console.WriteLine(command);
+        User user = new(command.UserName, command.Email, command.Password);
+        await _userRepository.Insert(user);
+        await _unitOfWork.CommitAsync();
     }
 }

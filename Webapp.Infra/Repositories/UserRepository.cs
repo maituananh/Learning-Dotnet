@@ -1,34 +1,40 @@
-﻿using Application.Repository;
+﻿using Application.Configurations;
+using Application.Repository;
 using Infra.Configuration;
+using Infra.Entity;
 
 namespace Infra.Repository;
 
-public class UserRepository : IUserRepository
+public class UserRepository(ApplicationDbContext context) : IUserRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext _context = context;
 
-    public UserRepository(ApplicationDbContext context)
+    public async Task Delete(Domain.User user)
     {
-        this._context = context;
+        var entry = _context.Entry(user);
+        entry.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+        
+        await Task.CompletedTask;
     }
 
-    Task IUserRepository.Delete()
+    public async Task Insert(Domain.User user)
     {
-        throw new NotImplementedException();
+        User entity = new()
+        {
+            Id = user.Id,
+            Name = user.Name,
+            Email = user.Email,
+            Password = user.Password
+        };
+
+        await _context.Users.AddAsync(entity);
     }
 
-    Task IUserRepository.FindByID(Guid id)
+    public async Task Update(Domain.User entity)
     {
-        throw new NotImplementedException();
-    }
+        var entry = _context.Entry(entity);
+        entry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
-    Task IUserRepository.Save()
-    {
-        throw new NotImplementedException();
-    }
-
-    Task IUserRepository.Update()
-    {
-        throw new NotImplementedException();
+        await Task.CompletedTask;
     }
 }
