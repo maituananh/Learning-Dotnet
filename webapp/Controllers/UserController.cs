@@ -12,11 +12,11 @@ namespace Controller.User;
 public class UserController(CreateUserHandler createUserHandler, IMapper mapper) : ControllerBase
 {
     [HttpPost]
-    public async Task<IActionResult> AddNewUser(UserCreateRequest request)
+    public async Task<IActionResult> AddNewUser(UserCreateRequest request, CancellationToken ct)
     {
         var userCommand = mapper.Map<CreateUserCommand>(request);
         
-        await createUserHandler.Create(userCommand);
+        await createUserHandler.Handle(userCommand, ct);
 
         return Ok();
     }

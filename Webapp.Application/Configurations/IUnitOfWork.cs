@@ -4,7 +4,5 @@ namespace Application.Configurations;
 
 public interface IUnitOfWork
 {
-    //IUserRepository UserRepository { get; }
-
-    Task CommitAsync();
+    Task CommitAsync(CancellationToken cancellationToken);
 }

@@ -1,28 +1,26 @@
-﻿using Infra.Configuration;
+﻿using Application.Configurations;
+using Infra.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Application.Usecases.CreateUserHandler;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Application.Configurations;
-using Infra.Configurations;
-using Application.Repository;
-using Infra.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace API.Configurations.DI;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection InstallServices (this IServiceCollection services, 
+        IConfiguration configuration,
+        params Assembly[] assemblies)
     {
-        services.AddDbContext<ApplicationDbContext>(option =>
-        {
-            option.UseSqlServer(configuration.GetConnectionString("url"));
-        });
+        IEnumerable<IServiceInstaller> serviceInstallers = assemblies.SelectMany(a => a.DefinedTypes)
+             .Where(t => typeof(IServiceInstaller).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract)
+             .Select(Activator.CreateInstance)
+             .Cast<IServiceInstaller>();
 
-        //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-        services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
-        services.AddScoped<CreateUserHandler>();
+        foreach (IServiceInstaller serviceInstaller in serviceInstallers) {
+            serviceInstaller.Install(services, configuration);
+        }
 
         return services;
     }

@@ -7,7 +7,7 @@ public class User
     public string Email { get; private set; }
     public string Password { get; private set; }
 
-    public User(Guid id, string name, string email, string password)
+    private User(Guid id, string name, string email, string password)
     {
         Id = id;
         Name = name;
@@ -15,7 +15,7 @@ public class User
         Password = password;
     }
 
-    public User(string name, string email, string password)
+    private User(string name, string email, string password)
     {
         Id = Guid.NewGuid();
         Name = name;
@@ -23,8 +23,13 @@ public class User
         Password = password;
     }
 
-    public User(Guid id)
+    private User(Guid id)
     {
         Id = id;
+    }
+
+    public static User Create(string name, string email, string password)
+    {
+        return new User(name, email, password);
     }
 }

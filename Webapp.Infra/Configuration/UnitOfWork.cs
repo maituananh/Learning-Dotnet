@@ -11,9 +11,9 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork, IDisposable
 
     private bool disposedValue;
 
-    public async Task CommitAsync()
+    public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync(cancellationToken);
     }
 
     protected virtual void Dispose(bool disposing)

@@ -17,7 +17,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         await Task.CompletedTask;
     }
 
-    public async Task Insert(Domain.User user)
+    public void Insert(Domain.User user)
     {
         User entity = new()
         {
@@ -27,7 +27,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             Password = user.Password
         };
 
-        await _context.Users.AddAsync(entity);
+        _context.Users.Add(entity);
     }
 
     public async Task Update(Domain.User entity)
