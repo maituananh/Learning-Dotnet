@@ -23,6 +23,13 @@ public class User
         Password = password;
     }
 
+    public User(Guid id, string name, string email)
+    {
+        Id = id;
+        Name = name;
+        Email = email;
+    }
+
     private User(Guid id)
     {
         Id = id;

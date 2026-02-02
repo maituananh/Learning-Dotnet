@@ -1,14 +1,10 @@
 ﻿namespace Infra.Entity;
 
-public class User
+public class Group
 {
     public Guid Id { get; set; }
 
     public string Name { get; set; }
-
-    public string Email { get; set; }
-
-    public string Password { get; set; }
 
     public ICollection<GroupUser> GroupUsers { get; set; } = [];
 }
