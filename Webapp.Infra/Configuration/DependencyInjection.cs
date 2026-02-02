@@ -1,5 +1,4 @@
-﻿using Application.Configurations;
-using Infra.Configuration;
+﻿using Infra.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

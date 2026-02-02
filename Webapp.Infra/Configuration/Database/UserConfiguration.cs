@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Infra.Entity;
 
-namespace Infra.Configuration;
+namespace Webapp.Infra.Configuration.Database;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
@@ -10,5 +10,9 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.ToTable("Users");
         builder.HasKey(e => e.Id);
+        builder
+            .HasMany(e => e.GroupUsers)
+            .WithOne(e => e.User)
+            .HasForeignKey(e => e.UserId);
     }
 }

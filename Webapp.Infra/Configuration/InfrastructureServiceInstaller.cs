@@ -1,6 +1,7 @@
 ﻿using Application.Configurations;
 using Application.Repository;
 using Application.Usecases.CreateUserHandler;
+using Application.Usecases.Group;
 using Infra.Configuration;
 using Infra.Configurations;
 using Infra.Repository;
@@ -16,6 +17,7 @@ namespace Webapp.Infra.Configuration
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped<CreateUserHandler>();
+            services.AddScoped<GetGroupByIdHandler>();
         }
     }
 }

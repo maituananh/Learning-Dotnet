@@ -1,5 +1,4 @@
-﻿using Application.Configurations;
-using Domain;
+﻿using Domain;
 
 namespace Application.Repository;
 
