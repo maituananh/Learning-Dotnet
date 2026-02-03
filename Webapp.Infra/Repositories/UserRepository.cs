@@ -1,6 +1,6 @@
 ﻿using Application.Repository;
 using Infra.Configuration;
-using Infra.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository;
 
@@ -8,12 +8,14 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 {
     private readonly ApplicationDbContext _context = context;
 
-    public async Task Delete(Domain.User user)
+    public async Task Delete(Guid id)
     {
-        var entry = _context.Entry(user);
-        entry.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+        var entry = await _context.Users.FindAsync(id);
 
-        await Task.CompletedTask;
+        if (entry != null)
+        {
+            _context.Remove(entry);
+        }
     }
 
     public async Task<Domain.User?> GetById(Domain.User user)
@@ -29,7 +31,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 
     public void Insert(Domain.User user)
     {
-        User entity = new()
+        Entity.User entity = new()
         {
             Id = user.Id,
             Name = user.Name,
@@ -40,11 +42,17 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         _context.Add(entity);
     }
 
-    public async Task Update(Domain.User entity)
+    public async Task Update(Domain.User user)
     {
-        var entry = _context.Entry(entity);
-        entry.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        var entity = await _context.Users.FindAsync(user.Id);
 
-        await Task.CompletedTask;
+        if (entity != null)
+        {
+            entity.Email = user.Email;
+            entity.Name = user.Name;
+            entity.Password = user.Password;
+
+            _context.Update(entity);
+        }
     }
 }

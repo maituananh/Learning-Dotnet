@@ -19,9 +19,9 @@ public class UserController(
     {
         var userCommand = mapper.Map<CreateUserCommand>(request);
 
-        await createUserHandler.Handle(userCommand, ct);
+        var domain = await createUserHandler.Handle(userCommand, ct);
 
-        return Ok();
+        return Ok(mapper.Map<UserResponse>(domain));
     }
 
     [HttpPatch("{userId:guid}/group/{groupId:guid}")]
@@ -29,8 +29,8 @@ public class UserController(
     {
         var assignment = new AssignUserToGroupCommand(userId, groupId);
 
-        var groupUser = await assignUserToGroupHandler.Handle(assignment, ct);
+        var domain = await assignUserToGroupHandler.Handle(assignment, ct);
 
-        return Ok(mapper.Map<GroupUserResponse>(groupUser));
+        return Ok(mapper.Map<GroupUserResponse>(domain));
     }
 }
