@@ -12,8 +12,19 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
         var entry = _context.Entry(user);
         entry.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-        
+
         await Task.CompletedTask;
+    }
+
+    public async Task<Domain.User?> GetById(Domain.User user)
+    {
+        var entity = await _context.Users.FindAsync(user.Id);
+
+        return entity is null ? null : new Domain.User(
+            id: entity.Id,
+            name: entity.Name,
+            email: entity.Email
+        );
     }
 
     public void Insert(Domain.User user)

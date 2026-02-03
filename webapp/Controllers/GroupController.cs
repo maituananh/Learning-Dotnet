@@ -21,7 +21,7 @@ public class GroupController : ControllerBase
     }
 
     [HttpGet("{groupId:guid}")]
-    public async Task<IActionResult> GetGroupById(Guid groupId, CancellationToken tx) 
+    public async Task<IActionResult> GetGroupById(Guid groupId, CancellationToken tx)
     {
         var group = await _getGroupByIdHandler.Handle(groupId, tx);
 

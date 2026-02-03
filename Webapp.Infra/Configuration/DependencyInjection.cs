@@ -8,7 +8,7 @@ namespace API.Configurations.DI;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection InstallServices (this IServiceCollection services, 
+    public static IServiceCollection InstallServices(this IServiceCollection services,
         IConfiguration configuration,
         params Assembly[] assemblies)
     {
@@ -17,7 +17,8 @@ public static class DependencyInjection
              .Select(Activator.CreateInstance)
              .Cast<IServiceInstaller>();
 
-        foreach (IServiceInstaller serviceInstaller in serviceInstallers) {
+        foreach (IServiceInstaller serviceInstaller in serviceInstallers)
+        {
             serviceInstaller.Install(services, configuration);
         }
 

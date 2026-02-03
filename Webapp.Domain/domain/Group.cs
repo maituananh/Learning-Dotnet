@@ -10,7 +10,7 @@ public class Group
     {
         Id = id;
     }
-    
+
     public Group(Guid id, string name, List<User> users)
     {
         Id = id;

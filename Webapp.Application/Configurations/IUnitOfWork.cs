@@ -1,6 +1,4 @@
-﻿using Application.Repository;
-
-namespace Application.Configurations;
+﻿namespace Application.Configurations;
 
 public interface IUnitOfWork
 {

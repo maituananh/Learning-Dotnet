@@ -17,9 +17,11 @@ namespace Webapp.Infra.Configuration
 
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IGroupRepository), typeof(GroupRepository));
+            services.AddScoped(typeof(IGroupUserRepository), typeof(GroupUserRepository));
 
             services.AddScoped<CreateUserHandler>();
             services.AddScoped<GetGroupByIdHandler>();
+            services.AddScoped<AssignUserToGroupHandler>();
         }
     }
 }

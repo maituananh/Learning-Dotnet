@@ -30,7 +30,7 @@ public class User
         Email = email;
     }
 
-    private User(Guid id)
+    public User(Guid id)
     {
         Id = id;
     }
