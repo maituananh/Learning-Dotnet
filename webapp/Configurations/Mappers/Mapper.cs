@@ -1,5 +1,5 @@
-﻿using API.Configurations.Mappers.Profiles;
-using API.Configurations.Mappers;
+﻿using API.Configurations.Mappers;
+using API.Configurations.Mappers.Profiles;
 
 namespace API.Configurations.Mappers;
 

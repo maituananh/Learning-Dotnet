@@ -1,4 +1,4 @@
-﻿using Application.Commands.User;
+﻿using Application.Commands;
 using Application.Configurations;
 using Application.Repository;
 using Application.Usecase;
@@ -6,7 +6,7 @@ using Domain;
 
 namespace Application.Usecases;
 
-public class CreateUserHandler(IUnitOfWork unitOfWork, IUserRepository userRepository) : 
+public class CreateUserHandler(IUnitOfWork unitOfWork, IUserRepository userRepository) :
     IRequestHandler<CreateUserCommand, User?>
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;

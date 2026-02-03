@@ -7,6 +7,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<Group> Groups => Set<Group>();
+    public DbSet<GroupUser> GroupUsers => Set<GroupUser>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

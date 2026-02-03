@@ -1,6 +1,6 @@
-﻿using Infra.Configuration;
+﻿using Application.Repository;
+using Infra.Configuration;
 using System.Linq.Expressions;
-using Application.Repository;
 
 namespace Infra.Repository;
 

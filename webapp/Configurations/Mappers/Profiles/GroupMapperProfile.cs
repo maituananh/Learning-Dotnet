@@ -1,12 +1,13 @@
-﻿using AutoMapper;
+﻿using API.Responses;
+using AutoMapper;
 using Domain;
-using API.Responses;
 
 namespace API.Configurations.Mappers.Profiles;
 
 public class GroupMapperProfile : Profile
 {
-    public GroupMapperProfile() {
+    public GroupMapperProfile()
+    {
         CreateMap<Group, GroupResponse>();
     }
 }

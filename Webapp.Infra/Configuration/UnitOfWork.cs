@@ -1,7 +1,5 @@
 ﻿using Application.Configurations;
-using Application.Repository;
 using Infra.Configuration;
-using Infra.Repository;
 
 namespace Infra.Configurations;
 

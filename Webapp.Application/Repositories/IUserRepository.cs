@@ -4,7 +4,8 @@ namespace Application.Repository;
 
 public interface IUserRepository
 {
-    void Insert(User entity);
-    Task Update(User entity);
-    Task Delete(User entity);
+    Task<User?> GetById(User user);
+    void Insert(User user);
+    Task Update(User user);
+    Task Delete(User user);
 }
