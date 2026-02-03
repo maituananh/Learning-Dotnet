@@ -9,7 +9,7 @@ public class GetGroupByIdHandler : IRequestHandler<Guid, Group?>
     private readonly IGroupRepository _groupRepository;
 
     public GetGroupByIdHandler(IGroupRepository groupRepository)
-    {
+{
         _groupRepository = groupRepository;
     }
 

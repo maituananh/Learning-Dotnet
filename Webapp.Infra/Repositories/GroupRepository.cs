@@ -16,7 +16,7 @@ public class GroupRepository(ApplicationDbContext context) : IGroupRepository
             .Include(g => g.GroupUsers)
             .ThenInclude(gu => gu.User)
             .FirstOrDefaultAsync(g => g.Id == group.Id);
-
+        
         if (entity == null)
         {
             return null;
