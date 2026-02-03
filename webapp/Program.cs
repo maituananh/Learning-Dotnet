@@ -1,5 +1,4 @@
 using API.Configurations.DI;
-using API.Configurations.Mappers;
 using Infra.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +14,7 @@ builder.Services.AddOpenApi();
 
 builder.Services.InstallServices(configuration, typeof(IServiceInstaller).Assembly);
 
-builder.Services.AddAutoMapper();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 

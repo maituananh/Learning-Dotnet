@@ -1,11 +1,10 @@
-using API.Configurations.DI;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using API.Requests;
-using Application.Usecases.CreateUserHandler;
+using Application.Usecases;
 using Application.Commands.User;
 
-namespace Controller.User;
+namespace API.Controllers;
 
 [ApiController]
 [Route("[controller]")]

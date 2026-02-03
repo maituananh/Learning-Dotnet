@@ -1,6 +1,6 @@
 ﻿using Application.Configurations;
 using Application.Repository;
-using Application.Usecases.CreateUserHandler;
+using Application.Usecases;
 using Infra.Configuration;
 using Infra.Configurations;
 using Infra.Repository;
@@ -14,8 +14,12 @@ namespace Webapp.Infra.Configuration
         public void Install(IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            services.AddScoped(typeof(IGroupRepository), typeof(GroupRepository));
+
             services.AddScoped<CreateUserHandler>();
+            services.AddScoped<GetGroupByIdHandler>();
         }
     }
 }

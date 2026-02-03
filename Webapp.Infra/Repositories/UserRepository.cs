@@ -1,5 +1,4 @@
-﻿using Application.Configurations;
-using Application.Repository;
+﻿using Application.Repository;
 using Infra.Configuration;
 using Infra.Entity;
 
@@ -27,7 +26,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
             Password = user.Password
         };
 
-        _context.Users.Add(entity);
+        _context.Add(entity);
     }
 
     public async Task Update(Domain.User entity)
