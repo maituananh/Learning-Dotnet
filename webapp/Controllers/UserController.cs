@@ -14,6 +14,7 @@ public class UserController(
     AssignUserToGroupHandler assignUserToGroupHandler,
     IMapper mapper) : ControllerBase
 {
+    //[Authorize]
     [HttpPost]
     public async Task<IActionResult> AddNewUser(UserCreateRequest request, CancellationToken ct)
     {

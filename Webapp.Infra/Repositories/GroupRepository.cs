@@ -24,6 +24,6 @@ public class GroupRepository(ApplicationDbContext context) : IGroupRepository
         return new Group(
             entity.Id,
             entity.Name,
-            [.. entity.GroupUsers.Select(gu => new User(gu.User.Id, gu.User.Name, gu.User.Email))]);
+            [.. entity.GroupUsers.Select(gu => new User(gu.User.Id, gu.User.UserName, gu.User.Email))]);
     }
 }

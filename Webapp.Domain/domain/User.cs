@@ -7,7 +7,7 @@ public class User
     public string Email { get; private set; }
     public string Password { get; private set; }
 
-    private User(Guid id, string name, string email, string password)
+    public User(Guid id, string name, string email, string password)
     {
         Id = id;
         Name = name;
@@ -30,13 +30,24 @@ public class User
         Email = email;
     }
 
-    public User(Guid id)
+    private User(string name, string password)
     {
-        Id = id;
+        Name = name;
+        Password = password;
     }
 
     public static User Create(string name, string email, string password)
     {
         return new User(name, email, password);
+    }
+
+    public static User Login(string username, string password)
+    {
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        {
+            throw new ArgumentException("Username and password must not be empty.");
+        }
+
+        return new User(username, password);
     }
 }

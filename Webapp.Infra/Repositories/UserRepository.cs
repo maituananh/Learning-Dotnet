@@ -1,10 +1,14 @@
 ﻿using Application.Repository;
 using Infra.Configuration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repository;
 
-public class UserRepository(ApplicationDbContext context) : IUserRepository
+public class UserRepository(
+    ApplicationDbContext context,
+    UserManager<Entity.User> userManager
+    ) : IUserRepository
 {
     private readonly ApplicationDbContext _context = context;
 
@@ -24,22 +28,19 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 
         return entity is null ? null : new Domain.User(
             id: entity.Id,
-            name: entity.Name,
-            email: entity.Email
+            name: entity.UserName!,
+            email: entity.Email!
         );
     }
 
-    public void Insert(Domain.User user)
+    public async Task Insert(Domain.User user)
     {
         Entity.User entity = new()
         {
-            Id = user.Id,
-            Name = user.Name,
+            UserName = user.Name,
             Email = user.Email,
-            Password = user.Password
         };
-
-        _context.Add(entity);
+        await userManager.CreateAsync(entity, user.Password);
     }
 
     public async Task Update(Domain.User user)
@@ -49,10 +50,27 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         if (entity != null)
         {
             entity.Email = user.Email;
-            entity.Name = user.Name;
-            entity.Password = user.Password;
+            entity.UserName = user.Name;
+            entity.PasswordHash = user.Password;
 
             _context.Update(entity);
         }
+    }
+
+    public async Task<Domain.User?> FindByUsername(string username)
+    {
+        var entity = await _context.Users.FirstOrDefaultAsync(u => u.UserName == username);
+
+        if (entity != null)
+        {
+            return new Domain.User(
+                id: entity.Id,
+                name: entity.UserName!,
+                email: entity.Email!,
+                password: entity.PasswordHash!
+            );
+        }
+
+        return null;
     }
 }
