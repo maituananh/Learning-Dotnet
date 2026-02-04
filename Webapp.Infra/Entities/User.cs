@@ -1,14 +1,9 @@
-﻿namespace Infra.Entity;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class User
+namespace Infra.Entity;
+
+public class User : IdentityUser<Guid>
+//, AuditEntity 
 {
-    public Guid Id { get; set; }
-
-    public string Name { get; set; }
-
-    public string Email { get; set; }
-
-    public string Password { get; set; }
-
     public ICollection<GroupUser> GroupUsers { get; set; } = [];
 }
