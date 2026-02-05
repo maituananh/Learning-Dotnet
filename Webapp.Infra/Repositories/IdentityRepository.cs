@@ -13,8 +13,7 @@ using System.Text;
 namespace Infra.Repositories;
 
 public class IdentityRepository(
-    UserManager<User> userManager,
-    //SignInManager<User> signInManager,
+    SignInManager<User> signInManager,
     ApplicationDbContext dbContext,
     IConfiguration configuration
     ) : IIdentityRepository
@@ -30,9 +29,9 @@ public class IdentityRepository(
             return null;
         }
 
-        var identityResult = await userManager.CheckPasswordAsync(userEntity, user.Password);
+        var identityResult = await signInManager.PasswordSignInAsync(userEntity, user.Password, false, false);
 
-        return identityResult ? new Domain.User(
+        return identityResult.Succeeded ? new Domain.User(
             id: userEntity.Id,
             name: userEntity.UserName!,
             email: userEntity.Email!
@@ -45,7 +44,7 @@ public class IdentityRepository(
             Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:Key")!));
 
         var credentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-
+        
         List<Claim> claims =
         [
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
