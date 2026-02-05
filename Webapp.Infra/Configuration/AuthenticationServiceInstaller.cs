@@ -1,10 +1,12 @@
 ﻿using Infra.Entity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 namespace Infra.Configuration;
@@ -13,11 +15,16 @@ internal class AuthenticationServiceInstaller : IServiceInstaller
 {
     public void Install(IServiceCollection services, IConfiguration configuration)
     {
-        services.AddIdentityCore<User>()
+        services.AddIdentity<User, IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
             .AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -33,5 +40,11 @@ internal class AuthenticationServiceInstaller : IServiceInstaller
             });
 
         services.AddAuthorization();
+        services.AddTransient(s =>
+        {
+            IHttpContextAccessor contextAccessor = s.GetService<IHttpContextAccessor>()!;
+            ClaimsPrincipal user = contextAccessor?.HttpContext?.User!;
+            return user;
+        });
     }
 }

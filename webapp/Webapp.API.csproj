@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Webapp.Infra\Webapp.Infra.csproj" />
-	  <ProjectReference Include="..\Webapp.Application\Webapp.Application.csproj" />
+	<ProjectReference Include="..\Webapp.Application\Webapp.Application.csproj" />
   </ItemGroup>
 
 </Project>

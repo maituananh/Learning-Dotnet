@@ -18,7 +18,7 @@ public class UserRepository(
 
         if (entry != null)
         {
-            _context.Remove(entry);
+            await userManager.DeleteAsync(entry);
         }
     }
 
