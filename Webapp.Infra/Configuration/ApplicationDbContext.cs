@@ -1,12 +1,12 @@
 ﻿using Infra.Entity;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Webapp.Infra.Entities;
 
 namespace Infra.Configuration;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options)
+    : IdentityDbContext<User, Role, Guid>(options)
 {
     public DbSet<Group> Groups => Set<Group>();
     public DbSet<GroupUser> GroupUsers => Set<GroupUser>();
