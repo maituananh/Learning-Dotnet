@@ -44,7 +44,7 @@ public class IdentityRepository(
             Encoding.UTF8.GetBytes(configuration.GetValue<string>("Jwt:Key")!));
 
         var credentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-        
+
         List<Claim> claims =
         [
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),

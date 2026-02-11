@@ -40,7 +40,20 @@ public class UserRepository(
             UserName = user.Name,
             Email = user.Email,
         };
-        await userManager.CreateAsync(entity, user.Password);
+
+        var userCreation = await userManager.CreateAsync(entity, user.Password);
+
+        if (!userCreation.Succeeded)
+        {
+            throw new Exception("User creation failed");
+        }
+
+        var userRole = await userManager.AddToRoleAsync(entity, "User");
+
+        if (!userRole.Succeeded)
+        {
+            throw new Exception("Assigning role failed");
+        }
     }
 
     public async Task Update(Domain.User user)

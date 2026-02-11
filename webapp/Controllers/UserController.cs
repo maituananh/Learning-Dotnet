@@ -25,7 +25,6 @@ public class UserController(
 
         var domain = await createUserHandler.Handle(userCommand, ct);
 
-        
         Console.WriteLine("User created with ID: " + claimsPrincipal.Claims.Where(c => c.Type == "name").Single().Value);
 
         return Ok(mapper.Map<UserResponse>(domain));

@@ -1,19 +1,21 @@
 ﻿using Application.Configurations;
 using Infra.Configuration;
 using Infra.Entities;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Infra.Configurations;
 
 public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork, IDisposable
 {
-    private readonly ApplicationDbContext _context = context;
-
     private bool disposedValue;
+
+    private IDbContextTransaction? _transaction;
 
     public async Task CommitAsync(CancellationToken cancellationToken = default)
     {
         audit();
-        await _context.SaveChangesAsync(cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+        await _transaction!.CommitAsync(cancellationToken);
     }
 
     protected virtual void Dispose(bool disposing)
@@ -22,7 +24,7 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork, IDisposable
         {
             if (disposing)
             {
-                _context.Dispose();
+                context.Dispose();
             }
 
             disposedValue = true;
@@ -37,7 +39,7 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork, IDisposable
 
     private void audit()
     {
-        var entries = _context.ChangeTracker.Entries()
+        var entries = context.ChangeTracker.Entries()
             .Where(e => e.Entity is AuditEntity && (e.State == Microsoft.EntityFrameworkCore.EntityState.Added || e.State == Microsoft.EntityFrameworkCore.EntityState.Modified));
 
         foreach (var entry in entries)
@@ -51,5 +53,15 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork, IDisposable
             }
             entity.UpdatedAt = now;
         }
+    }
+
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken)
+    {
+        _transaction = await context.Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task RollbackAsync(CancellationToken cancellationToken)
+    {
+        await _transaction!.RollbackAsync(cancellationToken);
     }
 }
