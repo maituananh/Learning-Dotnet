@@ -1,4 +1,4 @@
-﻿namespace Domain.Group;
+﻿namespace Domain;
 
 public class Group
 {
