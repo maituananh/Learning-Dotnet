@@ -1,4 +1,6 @@
-﻿namespace Domain;
+﻿using System.Text.Json.Serialization;
+
+namespace Domain;
 
 public class User
 {
@@ -7,12 +9,23 @@ public class User
     public string Email { get; private set; }
     public string Password { get; private set; }
 
+    [JsonConstructor]
     public User(Guid id, string name, string email, string password)
     {
         Id = id;
         Name = name;
         Email = email;
         Password = password;
+    }
+
+    public User(Guid id)
+    {
+        if (id.Equals(null))
+        {
+            throw new ArgumentException("Id must not be empty.");
+        }
+
+        Id = id;
     }
 
     private User(string name, string email, string password)
