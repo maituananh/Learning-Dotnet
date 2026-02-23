@@ -11,6 +11,7 @@ public class RedisServiceInstaller : IServiceInstaller
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = configuration.GetConnectionString("Redis");
+            options.InstanceName = "LearningDotnetCore";
         });
     }
 }

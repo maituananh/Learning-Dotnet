@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Webapp.Application.Usecases;
 
 namespace API.Controllers;
 
@@ -15,6 +16,7 @@ namespace API.Controllers;
 public class UserController(
     CreateUserHandler createUserHandler,
     AssignUserToGroupHandler assignUserToGroupHandler,
+    GetUserHandler getUserHandler,
     ClaimsPrincipal claimsPrincipal,
     IMapper mapper) : ControllerBase
 {
@@ -26,6 +28,21 @@ public class UserController(
         var domain = await createUserHandler.Handle(userCommand, ct);
 
         Console.WriteLine("User created with ID: " + claimsPrincipal.Claims.Where(c => c.Type == "name").Single().Value);
+
+        return Ok(mapper.Map<UserResponse>(domain));
+    }
+
+    [HttpGet("me")]
+    public async Task<IActionResult> Me(CancellationToken ct)
+    {
+        var userId = new Guid(claimsPrincipal.Claims.Where(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Single().Value);
+
+        var domain = await getUserHandler.Handle(userId, ct);
+
+        if (domain is null)
+        {
+            return NotFound();
+        }
 
         return Ok(mapper.Map<UserResponse>(domain));
     }
