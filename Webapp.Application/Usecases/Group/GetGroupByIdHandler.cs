@@ -1,6 +1,5 @@
-﻿using Application.Repository;
-using Application.Usecase;
-using Domain;
+﻿using Application.Usecase;
+using Domain.Repository;
 
 namespace Application.Usecases;
 

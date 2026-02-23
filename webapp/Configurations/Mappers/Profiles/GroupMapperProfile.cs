@@ -1,6 +1,5 @@
 ﻿using API.Responses;
 using AutoMapper;
-using Domain;
 
 namespace API.Configurations.Mappers.Profiles;
 

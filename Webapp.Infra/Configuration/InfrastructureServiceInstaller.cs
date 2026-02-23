@@ -1,7 +1,7 @@
 ﻿using Application.Configurations;
-using Application.Repositories;
-using Application.Repository;
 using Application.Usecases;
+using Domain.Repositories;
+using Domain.Repository;
 using Infra.Configuration;
 using Infra.Configurations;
 using Infra.Repositories;

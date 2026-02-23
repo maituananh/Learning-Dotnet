@@ -1,4 +1,4 @@
-﻿using Application.Repository;
+﻿using Domain.Repository;
 using Infra.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

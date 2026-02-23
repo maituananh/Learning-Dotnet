@@ -1,6 +1,4 @@
-﻿using Domain;
-
-namespace Application.Repository;
+﻿namespace Domain.Repository;
 
 public interface IUserRepository
 {
