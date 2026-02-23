@@ -1,5 +1,5 @@
-﻿using Application.Repository;
-using Domain;
+﻿using Domain;
+using Domain.Repository;
 using Infra.Configuration;
 using Microsoft.EntityFrameworkCore;
 

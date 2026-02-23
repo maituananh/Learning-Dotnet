@@ -1,7 +1,6 @@
-﻿using Domain;
-using Domain.domain;
+﻿using Domain.domain;
 
-namespace Application.Repositories;
+namespace Domain.Repositories;
 
 public interface IIdentityRepository
 {

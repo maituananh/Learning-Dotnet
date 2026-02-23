@@ -1,5 +1,5 @@
-﻿using Application.Repositories;
-using Domain.domain;
+﻿using Domain.domain;
+using Domain.Repositories;
 using Infra.Configuration;
 using Infra.Entity;
 using Microsoft.AspNetCore.Identity;

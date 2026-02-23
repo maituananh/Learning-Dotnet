@@ -1,8 +1,8 @@
 ﻿using Application.Commands;
-using Application.Repositories;
 using Application.Usecase;
 using Domain;
 using Domain.domain;
+using Domain.Repositories;
 
 namespace Application.Usecases;
 
