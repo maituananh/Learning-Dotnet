@@ -1,6 +1,11 @@
 <Solution>
-  <Project Path="Webapp.Application/Webapp.Application.csproj" Id="b752fcbd-5cd2-4920-a1f5-e4136757549d" />
-  <Project Path="Webapp.Domain/Webapp.Domain.csproj" Id="4e556e43-b8db-497a-b6e3-8ab773305747" />
-  <Project Path="Webapp.Infra/Webapp.Infra.csproj" Id="19f95334-b319-4bab-b0af-0d0b037d33c8" />
-  <Project Path="webapp/Webapp.API.csproj" />
+  <Folder Name="/src/">
+	  <Project Path="Webapp.Application/Webapp.Application.csproj" Id="b752fcbd-5cd2-4920-a1f5-e4136757549d" />
+	  <Project Path="Webapp.Domain/Webapp.Domain.csproj" Id="4e556e43-b8db-497a-b6e3-8ab773305747" />
+	  <Project Path="Webapp.Infra/Webapp.Infra.csproj" Id="19f95334-b319-4bab-b0af-0d0b037d33c8" />
+	  <Project Path="webapp/Webapp.API.csproj" />
+  </Folder>
+  <Folder Name="/unittests/">
+    <Project Path="Domain.UnitTests/Domain.UnitTests.csproj" Id="09226a10-b4d2-450f-ad21-bc0aa9aa73fa" />
+  </Folder>
 </Solution>
