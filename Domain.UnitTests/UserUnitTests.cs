@@ -16,7 +16,7 @@ public sealed class UserUnitTests
     public void CreateUser_Should_Return_UserNotNull()
     {
         var user = User.Create(
-            name: "username", 
+            name: "username",
             email: "username@gmail.com",
             password: "newPassword");
 
