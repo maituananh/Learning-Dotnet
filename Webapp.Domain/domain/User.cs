@@ -18,13 +18,13 @@ public class User
         Password = password;
     }
 
-    public User(Guid id)
+    public static User FindById(Guid id)
     {
-        if (id.Equals(null))
-        {
-            throw new ArgumentException("Id must not be empty.");
-        }
+        return new User(id);
+    }
 
+    private User(Guid id)
+    {
         Id = id;
     }
 
@@ -51,6 +51,11 @@ public class User
 
     public static User Create(string name, string email, string password)
     {
+        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
+        {
+            throw new ArgumentException("Name, email, and password must not be empty.");
+        }
+
         return new User(name, email, password);
     }
 

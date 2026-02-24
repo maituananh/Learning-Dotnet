@@ -8,6 +8,6 @@ public class GetUserHandler(IUserRepository userRepository) : IRequestHandler<Gu
 {
     public async Task<User?> Handle(Guid id, CancellationToken ct)
     {
-        return await userRepository.GetById(new User(id));
+        return await userRepository.GetById(User.FindById(id));
     }
 }
