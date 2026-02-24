@@ -8,8 +8,9 @@ IConfiguration configuration = builder.Configuration;
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddControllers()
+    .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; });
+
 builder.Services.AddOpenApi();
 
 builder.Services.InstallServices(configuration, typeof(IServiceInstaller).Assembly);
@@ -32,3 +33,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
