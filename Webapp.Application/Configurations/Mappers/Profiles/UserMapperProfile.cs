@@ -1,11 +1,11 @@
-﻿using API.Requests;
-using API.Responses;
-using Application.Commands;
+﻿using Application.Commands;
+using Application.Requests;
+using Application.Responses;
 using AutoMapper;
 using Domain;
 using Domain.domain;
 
-namespace API.Configurations.Mappers.Profiles;
+namespace Application.Configurations.Mappers.Profiles;
 
 public class UserMapperProfile : Profile
 {

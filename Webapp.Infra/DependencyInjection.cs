@@ -1,13 +1,14 @@
-﻿using Infra.Configuration;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Webapp.Application.Abstractions;
 
-namespace API.Configurations.DI;
+namespace Webapp.Infra;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection InstallServices(this IServiceCollection services,
+    public static IServiceCollection InstallServices(
+        this IServiceCollection services,
         IConfiguration configuration,
         params Assembly[] assemblies)
     {

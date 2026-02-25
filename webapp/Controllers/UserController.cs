@@ -1,6 +1,6 @@
-using API.Requests;
-using API.Responses;
 using Application.Commands;
+using Application.Requests;
+using Application.Responses;
 using Application.Usecases;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;

@@ -1,6 +1,6 @@
-﻿using Infra.Configuration;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Webapp.Application.Abstractions;
 
 namespace Webapp.Infra.Configuration;
 

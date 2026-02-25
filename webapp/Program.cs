@@ -1,19 +1,20 @@
-using API.Configurations.DI;
-using Infra.Configuration;
+using Webapp.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 IConfiguration configuration = builder.Configuration;
 
 // Add services to the container.
-
 builder.Services.AddControllers()
     .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNameCaseInsensitive = true; });
 
 builder.Services.AddOpenApi();
 
-builder.Services.InstallServices(configuration, typeof(IServiceInstaller).Assembly);
+builder.Services.InstallServices(
+    configuration,
+    typeof(Application.DependencyInjection).Assembly,
+    typeof(DependencyInjection).Assembly,
+    typeof(Program).Assembly);
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 

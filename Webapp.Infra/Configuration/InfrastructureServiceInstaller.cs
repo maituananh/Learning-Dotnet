@@ -1,14 +1,11 @@
-﻿using Application.Configurations;
-using Application.Usecases;
-using Domain.Repositories;
+﻿using Domain.Repositories;
 using Domain.Repository;
-using Infra.Configuration;
 using Infra.Configurations;
 using Infra.Repositories;
 using Infra.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Webapp.Application.Usecases;
+using Webapp.Application.Abstractions;
 using Webapp.Infra.Repositories;
 
 namespace Webapp.Infra.Configuration;
@@ -25,11 +22,5 @@ internal class InfrastructureServiceInstaller : IServiceInstaller
         services.AddScoped(typeof(IGroupRepository), typeof(GroupRepository));
         services.AddScoped(typeof(IGroupUserRepository), typeof(GroupUserRepository));
         services.AddScoped(typeof(IIdentityRepository), typeof(IdentityRepository));
-
-        services.AddScoped<CreateUserHandler>();
-        services.AddScoped<GetGroupByIdHandler>();
-        services.AddScoped<AssignUserToGroupHandler>();
-        services.AddScoped<AuthenHandler>();
-        services.AddScoped<GetUserHandler>();
     }
 }

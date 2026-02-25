@@ -1,4 +1,4 @@
-﻿using API.Responses;
+﻿using Application.Responses;
 using Application.Usecases;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
