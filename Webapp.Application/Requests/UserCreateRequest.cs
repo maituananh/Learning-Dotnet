@@ -1,4 +1,4 @@
-﻿namespace API.Requests;
+﻿namespace Application.Requests;
 
 public class UserCreateRequest
 {

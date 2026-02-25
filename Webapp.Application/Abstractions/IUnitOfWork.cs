@@ -1,4 +1,4 @@
-﻿namespace Application.Configurations;
+﻿namespace Webapp.Application.Abstractions;
 
 public interface IUnitOfWork
 {

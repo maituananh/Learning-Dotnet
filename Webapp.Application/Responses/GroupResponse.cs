@@ -1,4 +1,4 @@
-﻿namespace API.Responses;
+﻿namespace Application.Responses;
 
 public class GroupResponse
 {

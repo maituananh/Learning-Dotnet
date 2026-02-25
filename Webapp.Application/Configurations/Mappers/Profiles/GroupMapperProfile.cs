@@ -1,8 +1,8 @@
-﻿using API.Responses;
+﻿using Application.Responses;
 using AutoMapper;
 using Domain;
 
-namespace API.Configurations.Mappers.Profiles;
+namespace Application.Configurations.Mappers.Profiles;
 
 public class GroupMapperProfile : Profile
 {

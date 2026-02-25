@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using Webapp.Application.Abstractions;
 using Webapp.Infra.Entities;
 
 namespace Infra.Configuration;

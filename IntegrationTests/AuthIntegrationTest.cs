@@ -1,4 +1,4 @@
-﻿using API.Requests;
+﻿using Application.Requests;
 using FluentAssertions;
 using System.Net;
 using System.Net.Http.Json;

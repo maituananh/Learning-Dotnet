@@ -1,7 +1,8 @@
-﻿using Application.Configurations;
-using Infra.Configuration;
+﻿using Infra.Configuration;
 using Infra.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Webapp.Application.Abstractions;
 
 namespace Infra.Configurations;
 
@@ -40,14 +41,14 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork, IDisposable
     private void audit()
     {
         var entries = context.ChangeTracker.Entries()
-            .Where(e => e.Entity is AuditEntity && (e.State == Microsoft.EntityFrameworkCore.EntityState.Added || e.State == Microsoft.EntityFrameworkCore.EntityState.Modified));
+            .Where(e => e.Entity is AuditEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
 
         foreach (var entry in entries)
         {
             var entity = (AuditEntity)entry.Entity;
             var now = DateTime.UtcNow;
 
-            if (entry.State == Microsoft.EntityFrameworkCore.EntityState.Added)
+            if (entry.State == EntityState.Added)
             {
                 entity.CreatedAt = now;
             }
