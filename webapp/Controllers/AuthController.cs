@@ -18,11 +18,11 @@ public class AuthController(
     [HttpPost("token")]
     public async Task<IActionResult> GenerateToken([FromBody] AuthRequest auth, CancellationToken ct)
     {
-        var validationResult = validator.ValidateAsync(auth, ct);
+        var validationResult = await validator.ValidateAsync(auth, ct);
 
-        if (!validationResult.Result.IsValid)
+        if (!validationResult.IsValid)
         {
-            return BadRequest(validationResult.Result.Errors.Select(e => e.ErrorMessage));
+            return BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
         }
 
         var command = mapper.Map<AuthenticationCommand>(auth);
