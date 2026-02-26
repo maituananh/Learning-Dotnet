@@ -3,18 +3,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Webapp.Application.Abstractions;
 
-namespace Infra.Configuration
+namespace Infra.Configuration;
+
+internal class DatabaseServiceInstaller : IServiceInstaller
 {
-    internal class DatabaseServiceInstaller : IServiceInstaller
+    public void Install(IServiceCollection services, IConfiguration configuration)
     {
-        public void Install(IServiceCollection services, IConfiguration configuration)
+        services.AddDbContext<ApplicationDbContext>(option =>
         {
-            services.AddDbContext<ApplicationDbContext>(option =>
-            {
-                option.UseSqlServer(configuration.GetConnectionString("url"));
-                option.EnableDetailedErrors(true);
-                option.EnableSensitiveDataLogging(true);
-            });
-        }
+            option.UseSqlServer(configuration.GetConnectionString("DatabaseUrl"));
+            option.EnableDetailedErrors(true);
+            option.EnableSensitiveDataLogging(true);
+        });
     }
 }
